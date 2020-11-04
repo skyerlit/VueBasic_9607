@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGD8_D_9607</title>
+    <script src="vue.js"></script>
+    <style>
+        .footer {
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           width: 100%;
+           background-color: red;
+           color: white;
+           text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>Tebak Angka</h2>
+        <h4>Tebaklah Angka dari 1-10</h4>
+        <div>
+            <input type="number" v-model="AngkaNebak" placeholder="Input Angka" :disabled="isDis"/>
+            <button class="btn-primary" @click="nebak" :disabled="isDis">Tebak</button>
+        </div>
+        <br>
+        Kesempatan : {{ chance }}
+        <br><br>
+        JAWABAN ANGKA : {{ angka }}
+        <br><br>
+
+        <div class="text-center" v-show="isBenar">
+            <p>{{ hasil('BENAR') }}</p>
+        </div>
+        <div class="text-center" v-show="isSalah">
+            <p>{{ hasil('SALAH, COBA LAGI') }}</p>
+        </div>
+        <div class="text-center" v-show="isKalah">
+            <p>{{ hasil('KESEMPATAN HABIS') }}</p>
+        </div>
+
+        <button class="btn btn-primary" @click="ulangi" :disabled="isDisMain">MAIN AGAIN</button>
+        <button class="btn btn-warning" @click="cobaLagi" :disabled="isDisCoba">COBA AGAIN</button>
+
+        <div class="footer">
+            <p>{{ mhs.nama }} | {{ mhs.npm }} | {{ mhs.kelas }}</p>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            angka: Math.floor(Math.random()*10)+1,
+            AngkaNebak: undefined,
+            chance: 3,
+            isBenar: false,
+            isSalah: false,
+            isKalah: false,
+            isDis:false,
+            isDisMain:true,
+            isDisCoba:false,
+            mhs: {
+                nama: 'Theodore Aldo Wijaya',
+                npm: '180709607',
+                kelas: 'D',
+            }
+        },
+        methods: {
+            nebak(){
+                console.log(this.angka);
+                if(this.AngkaNebak == this.angka && this.chance!=0){
+                    this.isBenar=true;
+                    this.isDis=true;
+                    this.isDisMain=false;
+                    this.isDisCoba=true;
+                }
+                else if(this.AngkaNebak != this.angka && this.chance!=0){
+                    this.isSalah=true;
+                    this.isDis=true;
+                    this.chance--;
+                }
+
+                if(this.chance==0){
+                    this.isKalah=true;
+                    this.isSalah=false;
+                    this.isDisMain=false;
+                    this.isDisCoba=true;
+                }
+            },
+            cobaLagi(){
+                this.isDis = false;
+                this.isSalah = false;
+            },
+            ulangi(){
+               location.reload();
+            },
+            hasil(x){
+                return `${x}`;
+            }
+        },
+    });
+</script>
+</html>
