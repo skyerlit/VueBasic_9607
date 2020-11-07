@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- jquery for Bootstrap -->
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script> 
+
+  <!-- bootstrap -->
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- font awesome -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Vue.js script source -->
+  <script src="vue.js"></script>
+
+  <style>
+    .taskDone {
+      text-decoration: line-through;
+    }
+
+    .footer {
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           width: 100%;
+           background-color: red;
+           color: white;
+           text-align: center;
+        }
+  </style>
+
+  <title>Todo List App</title>
+</head>
+<body>
+<div class="container col-sm-8 col-sm-offset-2">
+  <div id="taskApp">
+    <h4>Todo Task List App</h1>
+
+    <!-- Add new task form -->
+    <div class="panel panel-default">
+      <h5>Add New Task</h2>
+
+      <form v-on:submit='addTask'>
+        <div class="col-sm-8">
+          <table cellspacing="4" cellpadding="4">
+            <tr>
+                <td> <label for="task name">Task Name</label> </td>
+                <td> <input style="width:400px;" type="text" class='form-control' v-model='tasks.taskName' required></td>
+            </tr>
+            <tr>
+              <td> <label for="task name">Priority</label> </td>
+              <td><select name="priority" class='form-control' v-model='tasks.priority' required>
+                  <option value="Penting">Penting</option>
+                  <option value="Biasa">Biasa</option>
+                  <option value="Tidak Penting">Tidak Penting</option>
+              </select></td>
+              <td>
+                  <input style="width:200px;"type="submit" value='Add' class='btn btn-primary btn-block'>
+              </td>
+            </tr>
+            <tr>
+              <td> <label for="task name">Note</label> </td>
+              <td><input type="text" class='form-control' v-model='tasks.note' required></td>
+            </tr>
+          </table>
+          </div>
+          <br>
+      </form>
+      &nbsp;
+    </div>
+
+    <table class="table">
+      <thead>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Note</th>
+        <th>Delete</th>
+      </thead>
+
+      <tbody>
+        <tr v-for='task in tasks'>
+          <td><span>{{ task.taskName }}</span></td>
+          <td>
+              <span v-if="task.priority == 'Penting'" class="badge badge-light text-danger">{{ task.priority }}</span>
+              <span v-else-if="task.priority == 'Biasa'" class="badge badge-light text-primary">{{ task.priority }}</span>
+              <span v-else-if="task.priority == 'Tidak Penting'" class="badge badge-light text-success">{{ task.priority }}</span>
+            </td>
+          <td><span>{{ task.note }}</span></td>
+          <td><button class="btn btn-danger btn-block" v-on:click="deleteTask(task)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="footer">
+      <p>{{ mhs.nama }} | {{ mhs.npm }} | {{ mhs.kelas }}</p>
+    </div>
+    
+  </div>
+</div>
+
+
+<script>
+var taskApp = new Vue({
+  el: '#taskApp',
+  data: {
+    dialog: false,
+    mhs:  {
+            nama: 'Theodore Aldo Wijaya',
+            npm: '180709607',
+            kelas: 'D',
+          },
+    tasks: [
+      { taskName: "bernafas", priority: "Penting", note: "huffttt"},
+      { taskName: "nongkrong", priority: "Tidak Penting", note: "bersama tman2" },
+      { taskName: "masak", priority: "Biasa", note: "masak air 500ml", },
+    ]
+  },
+  methods: {
+    addTask: function(e) {
+      e.preventDefault();
+      this.tasks.push({
+        taskName: this.tasks.taskName,
+        priority: this.tasks.priority,
+        note: this.tasks.note
+      });
+    },
+    deleteTask: function(task) {
+      this.tasks.splice(this.tasks.indexOf(task), 1)
+    }
+  }
+});
+</script>
+</body>
+</html>
