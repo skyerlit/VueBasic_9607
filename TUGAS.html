@@ -117,9 +117,9 @@ var taskApp = new Vue({
             kelas: 'D',
           },
     tasks: [
-      { taskName: "bernafas", priority: "Penting", note: "huffttt"},
-      { taskName: "nongkrong", priority: "Tidak Penting", note: "bersama tman2" },
-      { taskName: "masak", priority: "Biasa", note: "masak air 500ml", },
+      { taskName: "Mandi", priority: "Penting", note: "BYUR BYUR"},
+      { taskName: "Makan", priority: "Biasa", note: "YAM YAM" },
+      { taskName: "Main Game", priority: "Tidak Penting", note: "sampe jago", },
     ]
   },
   methods: {
@@ -130,10 +130,14 @@ var taskApp = new Vue({
         priority: this.tasks.priority,
         note: this.tasks.note
       });
+      this.tasks.taskName=null;
+      this.tasks.priority=null;
+      this.tasks.note=null;
+      
     },
     deleteTask: function(task) {
       this.tasks.splice(this.tasks.indexOf(task), 1)
-    }
+    },
   }
 });
 </script>
