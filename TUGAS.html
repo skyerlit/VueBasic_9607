@@ -5,20 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- jquery for Bootstrap -->
-  <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script> 
-
-  <!-- bootstrap -->
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-  <!-- font awesome -->
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-  <!-- Vue.js script source -->
   <script src="vue.js"></script>
 
   <style>
@@ -44,7 +33,6 @@
   <div id="taskApp">
     <h4>Todo Task List App</h1>
 
-    <!-- Add new task form -->
     <div class="panel panel-default">
       <h5>Add New Task</h2>
 
@@ -74,7 +62,6 @@
           </div>
           <br>
       </form>
-      &nbsp;
     </div>
 
     <table class="table">
@@ -107,10 +94,9 @@
 
 
 <script>
-var taskApp = new Vue({
-  el: '#taskApp',
+new Vue({
+  el: "#taskApp",
   data: {
-    dialog: false,
     mhs:  {
             nama: 'Theodore Aldo Wijaya',
             npm: '180709607',
@@ -133,7 +119,6 @@ var taskApp = new Vue({
       this.tasks.taskName=null;
       this.tasks.priority=null;
       this.tasks.note=null;
-      
     },
     deleteTask: function(task) {
       this.tasks.splice(this.tasks.indexOf(task), 1)
